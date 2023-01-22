@@ -1,0 +1,9 @@
+<h4>You are currently editing the interview with id=<%=interview._id%></h4>
+
+<form action="/interview/update_interview/<%=interview._id%>" method="POST">
+    <input type="text" name="company" value="<%=interview.company%>" placeholder="company name" /><br>
+    <input type="email" name="email" value="<%=interview.email%>" placeholder="email" /><br>
+    <input type="text" name="result" value="<%=interview.result%>" placeholder="result" /><br>
+    <input type="date" name="date_of_interview" value="<%=interview.date_of_interview%>" placeholder="date of interview"/>
+    <button>submit</button>
+  </form>

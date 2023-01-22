@@ -1,0 +1,7 @@
+
+<form action="/student/register/<%=student._id %>/interviews" method="POST">
+  <input type="text" name="company" placeholder="company name" /><br>
+  <input type="date" name="date_of_interview" placeholder="date of interview"/>
+  <input type="hidden" name="student" value="<%=student._id%>"/>
+  <button>submit</button>
+  </form>

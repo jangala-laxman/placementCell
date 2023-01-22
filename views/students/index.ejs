@@ -1,0 +1,39 @@
+All Students
+
+<%student.forEach((i)=>{%>
+
+<h3><%= i.username%>    </h3>
+<%= i._id%><br>
+<p><%= i.email%>    </p>
+<p><%= i.college%>    </p>
+<p><%= i.batch%>    </p>
+<p><%= i.status%>    </p>
+<ul>
+    <li><p>DSA Score <%= i.DSA%>    </p></li>
+     <li><p>WebDev score <%= i.Webdev%>    </p></li>
+     <li> <p>React Score <%= i.React%>    </p></li>
+</ul>
+<h5>You have applied for the following companies</h5>
+<ol>
+    <%for(let j of i.interviews){%>
+        <li>
+            <div>
+                <p><%= j._id%></p>
+                <p><%= j.company%></p>
+                <p><%= j.date_of_interview%></p>
+                <p><a href="/interview/update/<%=j._id%>">Edit</a></p>
+                <p><a href="/interview/delete/<%=j._id%>">Delete</a></p>
+
+            </div>
+        </li>
+    <%}%>
+</ol>
+<a href="/student/register/<%=i._id%>/interviews">Register for Interview</a><br>
+<a href="/student/update/<%=i._id%>">Edit</a><br>
+<a href="/student/delete/<%=i._id%>">delete</a><br>
+<hr>
+    
+<%})%>
+
+    <br><br>
+

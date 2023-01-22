@@ -1,0 +1,19 @@
+
+
+<h4>Please register for the companies below</h4>
+
+<select>
+    <option name="company" value="facebook">Facebook</option>
+    <option  name="company" >Amazon</option>
+    <option  name="company" >Adobe</option>
+    <option  name="company" >Netflix</option>
+    <option  name="company" >Google</option>
+    <option  name="company" >JP</option>
+
+</select>
+<br>
+<%for(let i of interview){%>
+    <a href="/student/register/:id/enroll"><%= i.company_name%></a><br>
+    <%= i.ctc%><br>
+    <%}%>  
+    <br><br>
