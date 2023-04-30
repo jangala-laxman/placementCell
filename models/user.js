@@ -1,5 +1,5 @@
 const { timeStamp } = require("console");
-const {isEmail} = require('validator')
+// const {isEmail} = require('validator')
 const bcrypt = require('bcryptjs')
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);

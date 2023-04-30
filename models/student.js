@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Interview = require("./interview");
 mongoose.set("strictQuery", false);
 const studentSchema = new mongoose.Schema(
   {
@@ -43,8 +44,20 @@ const studentSchema = new mongoose.Schema(
     interviews:[{
       type:mongoose.Schema.Types.ObjectId,
       ref:"Interview"
-    }]
+    }],
+    company:[{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Company'
+    }],
+    application_number:{
+      type:Number,
+    }
+
   }
 );
+
+// studentSchema.pre('remove',(next)=>{
+//   this.model('Client').remove({ submission_ids: this._id }, next);
+// })
 
 module.exports = mongoose.model("Student", studentSchema);

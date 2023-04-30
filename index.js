@@ -15,7 +15,7 @@ const Interview = require("./models/interview");
 const session = require('express-session')
 const db = mongoose.connection;
 
-mongoose.connect("mongodb://127.0.0.1:27017/placement");
+mongoose.connect("mongodb+srv://srilaxman48:L1u9c9k9y@cluster0.zwtmwnc.mongodb.net/Placement");
 db.on("error", console.error.bind("error while connecting to db"));
 mongoose.set({ strictQuery: false });
 db.once("open", () => {
@@ -53,4 +53,6 @@ app.use("/user", userRouter);
 app.use('/dashboard', csvRouter)
 
 
-app.listen(3000); //the server object listens on port 8080
+app.listen(3000, ()=>{
+  console.log("listening to port 3000")
+}); //the server object listens on port 8080

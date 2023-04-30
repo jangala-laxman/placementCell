@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Student = require('../models/student')
 const Interview = require('../models/interview')
+const Company = require('../models/company')
 
 router.get('/', async(req,res)=>{
     const interviews = await Interview.find()
@@ -53,9 +54,37 @@ router.post('/update/:id', async(req,res)=>{
     
 // })
 
+router.get('/all_companies', async(req,res)=>{
+    const companies = await Company.find()
+    console.log(companies)
+    res.render('company/all_companies.ejs',{companies:companies})
+})
+
+
 
 router.get('/delete/:id', async(req,res)=>{
+    const student = await Student.findOne({interviews:req.params.id})
+    // const interviews = await Student.interviews;
+    // console.log(student.interviews)
+    const id = req.params.id
+    const interview = await Interview.findById(req.params.id)
+    const interviews = student.interviews
+    let k = 0;
+    for(let i=0;i<interviews.length;i++){
+        if(student.interviews[i]._id == req.params.id){
+            k=i;
+            console.log(interview.company)
+        }
+    }
+    interviews.splice(k,1)
+    console.log(interviews)
+    await student.updateOne({interviews:interviews})
     await Interview.findByIdAndRemove(req.params.id)
-    res.redirect('/interview')
+
+    res.redirect('/student')
 })
+
+
+
+
 module.exports  = router

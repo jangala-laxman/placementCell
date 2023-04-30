@@ -2,13 +2,14 @@ const express = require("express");
 const Student = require('../models/student')
 const Interview = require('../models/interview');
 const router = express.Router();
-
+const Company = require('../models/company')
 router.get('/', async(req,res)=>{
     const student = await Student.find({}).populate('interviews')
-    const interview = await Interview.find()
-    // console.log(student)
+    const interview = await Interview.find({}).populate('students')
+    const company = await Company.find()
+    console.log(interview)
     try{
-        res.render('students/index', {student:student, interview:interview})
+        res.render('students/index', {student:student, companies:company})
     }
     catch(err){
         res.redirect('/')
@@ -24,7 +25,6 @@ router.get('/add_student', async (req,res)=>{
     catch(err){
         res.redirect('/student')
     }
-   
 })
 
 router.post('/add_student', async(req,res)=>{
@@ -41,7 +41,8 @@ router.post('/add_student', async(req,res)=>{
             status:req.body.status,
             DSA:req.body.DSA,
             React: req.body.React,
-            Webdev:req.body.Webdev
+            Webdev:req.body.Webdev,
+            application_number:Math.floor(Math.random()*100)
         })        
         await student.save()
         res.redirect('/student')
@@ -53,7 +54,8 @@ router.post('/add_student', async(req,res)=>{
 
 router.get('/update/:id',async(req,res)=>{
     let id = req.params.id
-    console.log(req.id)
+    // console.log(req.id)
+   
     Student.findById(id, (err,student)=>{
         if(err){
             console.log(err)
@@ -96,10 +98,11 @@ router.post('/update/:id',async(req,res)=>{
 router.get('/delete/:id',async(req,res)=>{
     try{
         const student = await Student.findById(req.params.id)
-        Interview.deleteMany({student:req.params.id})
-        await Student.findByIdAndRemove(req.params.id) 
-       
-    res.redirect("/student")
+        await Interview.deleteMany({students:req.body.id})
+        await student.deleteOne()
+    //    console.log(student)
+        res.redirect("/student")
+        // res.send(interview)
 
     }catch(err){
         console.log(err)
@@ -108,35 +111,33 @@ router.get('/delete/:id',async(req,res)=>{
 })
 
 
-router.get('/register/:student/interviews',async(req,res)=>{
+router.get('/register/:company/enroll',async(req,res)=>{
     try{
-        const id = req.params.student
-        
-        const student = await Student.findById(id);
-        res.render("interview/enroll_interview", {student:student})
+        const id = req.params.company        
+        const company = await Company.findById(id);
+        console.log(company)
+        res.render("interview/enroll_interview", {company:company})
     }catch(err){
        console.log(err)
-       res.redirect('/student')
+       res.redirect('/')
     }
 })
 
-router.post('/register/:student/interviews',async(req,res)=>{
+router.post('/register/:company/enroll',async(req,res)=>{
     try{
-        const id = req.params.student
-        
-        const interview = new Interview({
-            company:req.body.company,
-            date_of_interview:req.body.date_of_interview,
-        })
-        await interview.save()
-        const student = await Student.findById(id)
-        student.interviews.push(interview)
-        await student.save()
-        console.log(student.interviews)
-        res.render("interview/enroll_interview",{student:student})
+        const id = req.params.company        
+        const company = await Company.findById(id)
+        console.log(company)
+        const student = await Student.findOne({application_number:req.body.students})    
+        console.log(student)
+        let students = company.students
+        students.push(student._id)
+        await company.updateOne({students:students})
+        console.log(company)
+        res.render("interview/enroll_interview",{company:student})
     }catch(err){
        console.log(err)
-       res.redirect('/student')
+       res.send(err)
     }
 })
 
