@@ -10,13 +10,13 @@ const companySchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    interviews:{
+    result:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Interview'
+        ref:'Interview',
     },
     students:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Student'
+        ref:'Student',    
     }]
 
 })

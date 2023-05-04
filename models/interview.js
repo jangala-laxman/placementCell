@@ -2,16 +2,17 @@ const mongoose  = require('mongoose')
 const interviewSchema = new mongoose.Schema({
    
     company:{
-        type:String,
-        required:true,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Company',
     },
-    students:{
+    student:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Student'
     },
     result:{
-        type:String,
-        enum:["Pass","Onhold", "Didn't Attempt", "Fail"]
+        type:'String',
+        enum:["Pass","Onhold", "Didn't Attempt", "Fail"],
+        required:true
     },
 })
 

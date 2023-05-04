@@ -38,13 +38,10 @@ const studentSchema = new mongoose.Schema(
       required:true
     },
     result:{
-      type:String,
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Interview',
       enum:["Pass","Onhold", "Didn't Attempt", "Fail"]
     },
-    interviews:[{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:"Interview"
-    }],
     company:[{
       type:mongoose.Schema.Types.ObjectId,
       ref:'Company'
