@@ -3,22 +3,23 @@ const Student = require('../models/student')
 const Interview = require('../models/interview');
 const router = express.Router();
 const Company = require('../models/company')
+
+
 router.get('/', async(req,res)=>{
-    const student = await Student.find({}).populate('interviews')
-    const interview = await Interview.find({}).populate('students')
-    const company = await Company.find()
+    const student = await Student.find({}).populate('company')
+    const interview = await Interview.find({}).populate('student')
+    const company = await Company.find({}).populate('students')
     console.log(interview)
     try{
-        res.render('students/index', {student:student, companies:company})
+        res.render('students/index', {student:student})
     }
     catch(err){
         res.redirect('/')
     }
 })
 
-
 router.get('/add_student', async (req,res)=>{
-    const student = await Student.find({}).populate("interviews")
+    const student = await Student.find({}).populate("company")
     try{
         res.render('students/add_student', {student:student})
     }
@@ -30,10 +31,7 @@ router.get('/add_student', async (req,res)=>{
 router.post('/add_student', async(req,res)=>{
     
   try{
-    // const newStudent = await student.save()
-    const password = req.body.password;
-    const confirm_password = req.body.confirm_password
-        const student = new Student({
+       const student = new Student({
             username:req.body.username,
             email:req.body.email,
             college:req.body.college,
@@ -106,10 +104,9 @@ router.get('/delete/:id',async(req,res)=>{
 
     }catch(err){
         console.log(err)
+        res.send(err)
     }
-   
 })
-
 
 router.get('/register/:company/enroll',async(req,res)=>{
     try{
@@ -127,13 +124,25 @@ router.post('/register/:company/enroll',async(req,res)=>{
     try{
         const id = req.params.company        
         const company = await Company.findById(id)
-        console.log(company)
+        console.log(company._id)
+
         const student = await Student.findOne({application_number:req.body.students})    
         console.log(student)
+
         let students = company.students
+        let companies = student.company
+
+        companies.push(company._id)
         students.push(student._id)
-        await company.updateOne({students:students})
+       
+        await company.updateOne({$push:{students:student}})
+        await student.updateOne({$push:{company:company}})
         console.log(company)
+        await Interview.create({
+            company:company,
+            student:student,
+            result:"Didn't Attempt",
+        })
         res.render("interview/enroll_interview",{company:student})
     }catch(err){
        console.log(err)
@@ -142,5 +151,5 @@ router.post('/register/:company/enroll',async(req,res)=>{
 })
 
 
-module.exports = router;
 
+module.exports = router;

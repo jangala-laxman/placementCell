@@ -9,7 +9,7 @@ const passport = require('passport')
 router.get('/login', async(req,res)=>{
     const user = await User.find({})
     try{
-        res.render('users/user_login', {user:user})
+        res.sendFile('user/user_login.html')
     }
     catch(err){
         res.redirect('/')
@@ -35,7 +35,7 @@ router.post('/login', async(req,res)=>{
 router.get('/register', async (req,res)=>{
     const user = await User.find({})
     try{
-        res.render('users/user_register')
+        res.sendFile(__dirname+'/users/user_register')
     }
     catch(err){
         res.redirect('/user')

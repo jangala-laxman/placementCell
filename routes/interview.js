@@ -5,8 +5,8 @@ const Interview = require('../models/interview')
 const Company = require('../models/company')
 
 router.get('/', async(req,res)=>{
-    const interviews = await Interview.find()
-    res.render('interview/all_interviews',{interviews:interviews})    
+    const company = await Company.find().populate('students')
+    res.render('interview/all_interviews',{companies:company})    
 })
 
 router.get('/create_interview', async(req,res)=>{
@@ -38,27 +38,13 @@ router.post('/update/:id', async(req,res)=>{
     })
 })
 
-// router.post('/create_interview', async (req,res)=>{
-//     try{
-//         const email = req.body.email
-//         const student = await Student.findOne({email:email})
-//         const interviews = new Interview({
-//             company:req.body.company,
-//             date_of_interview:req.body.date_of_interview,  
-//         })
-//         await interviews.save({})
-//         res.redirect('/student')
-//     }catch(err){
-//         console.log(err)
-//     }
-    
-// })
 
 router.get('/all_companies', async(req,res)=>{
     const companies = await Company.find()
     console.log(companies)
     res.render('company/all_companies.ejs',{companies:companies})
 })
+
 
 
 
@@ -85,6 +71,22 @@ router.get('/delete/:id', async(req,res)=>{
 })
 
 
+router.get('/results/:interview', async(req,res)=>{
+    const interview = await Interview.findById(req.params.interview) 
+    res.render('interview/update_interview', {student:interview.student, company:interview.company, interview:interview})
+})
 
+router.post('/results/:interview', async(req,res)=>{
+    const interview = await Interview.findById(req.params.interview)
+    const studentId = interview.student
+    const student = await Student.findById(studentId)
+    await interview.updateOne({result:req.body.result})
+    if(req.body.result === "Pass"){
+        await student.updateOne({
+            status:"true"
+        })
+    }
+    res.render('interview/update_interview', {student:interview.student, company:interview.company, interview:interview})
+})
 
 module.exports  = router
