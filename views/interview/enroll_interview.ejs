@@ -1,12 +1,11 @@
 
-<form action="/student/register/<%=company._id %>/enroll" method="POST">
-  <input type="text" name="students" placeholder="your application id"/><br/>
+<form method="POST">
+  <input type="text" name="students" placeholder="student application id"/><br/>
   <input type="text" placeholder="skills"/><br/>
   <input type="text" placeholder="Pass percentage in latest degree"/><br/>
   <input type="text" placeholder="projects"/><br/>
   <input type="text" placeholder="social profiles"/><br/>
-  
+
   <p>Upload resume</p><input type="file" placeholder="upload Resume"/>
-  <input type="hidden" name="company_id" value="<%=company._id%>"/>
   <button>submit</button>
   </form>

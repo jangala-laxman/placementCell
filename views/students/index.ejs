@@ -12,24 +12,15 @@ All Students
 
 <ul>
     <li><p>DSA Score <%= i.DSA%>    </p></li>
-     <li><p>WebDev score <%= i.Webdev%>    </p></li>
-     <li> <p>React Score <%= i.React%>    </p></li>
+    <li><p>WebDev score <%= i.Webdev%>    </p></li>
+    <li><p>React Score <%= i.React%>    </p></li>
 </ul>
 
 <h5>You have applied for the following companies</h5>
-<ol>
-    <%for(let j of i.companies){%>
-        <li>
-            <div>
-                <p><%= j._id%></p>
-                <p><%= j.company%></p>s
-                <p><a href="/interview/update/<%=j._id%>">Edit</a></p>
-                <p><a href="/interview/delete/<%=j._id%>">Delete</a></p>
-
-            </div>
-        </li>
+<% for(let j of i.company){%>
+    <%= j.company%><br>
     <%}%>
-</ol>
+
 <a href="/company/all_companies">Register for Interview</a><br>
 <a href="/student/update/<%=i._id%>">Edit</a><br>
 <a href="/student/delete/<%=i._id%>">delete</a><br>

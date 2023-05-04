@@ -1,44 +1,14 @@
-<div class="hero">
-    <nav>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEmRRF4Ey_qQCPng5fjO2M4ESVSQlVnTj86g&usqp=CAU"
-             alt="logo" class="menu-img"/>
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Jobs</a></li>
-            <li><a href="">Placed students</a></li>
-            <li><a href="">Help & Support</a></li>
-
-        </ul>
-    </nav>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <h1>Home page</h1>
-<a href="/dashboard">Download report</a><br><br>
+<a href="/dashboard/aa">Download report</a><br><br>
 
 <%for(let i of students){%>
 <%=i.username%><br>
 <%=i.college%><br>
 <%= i.batch %><br>
 <h5>List of interviews</h5>
-<%for(let j of i.interviews){%>
+<%for(let j of i.company){%>
     <%=j.company%><br>
-    <%=j.date_of_interview%><br>
     
 <%}%>
 <br>
@@ -46,9 +16,3 @@
 
     <hr>
 
-<%for(let i of interviews){%>
-    <%=i.company%><br>
-    <%=i.date_of_interview%><br>
-    
-<%}%><br>
-<br>

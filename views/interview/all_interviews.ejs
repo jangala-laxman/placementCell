@@ -1,12 +1,8 @@
 <h1>All Interviews</h1>
 <hr>
-<%for(let i of interviews){%>
-    <%= i._id%><br>
-
+<%for(let i of companies){%>
     <%= i.company%><br>
-    <%= i.date_of_interview%><br>
-    
-    <a href="/interview/update/<%=i._id%>">Edit</a><br>
-    <a href="/interview/delete/<%=i._id%>">delete</a><br><br>
+    <a href="/company/update/<%=i._id%>">Edit</a>
+    <a href="/company/delete/<%=i._id%>">delete</a><br><br>
     <hr>
 <%}%>

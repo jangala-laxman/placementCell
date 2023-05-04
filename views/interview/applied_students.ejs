@@ -1,0 +1,9 @@
+<h4>List of students applied for <%= company.company%> interview </h4>  
+
+<%for(let i of company.students){%>
+    <p>Username :<%= i.username%> </p>
+    <a href="/interview/results/<%=interview._id%>">Update Interview</a>
+    <a href="/company/<%=company._id%>/allocate_interview/<%=i._id%>">Allocate Interview</a>
+    <a href="/company/<%=company._id%>/delete/<%=i._id%>">drop interview</a>
+
+<%}%>    
