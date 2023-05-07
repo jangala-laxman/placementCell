@@ -1,5 +1,6 @@
 <h1>All Interviews</h1>
 <hr>
+<<<<<<< HEAD
 
 <%for(let i of companies){%>
     <div class="list">
@@ -30,3 +31,11 @@
       margin:10px 1px 1px 50px;
     }
 </style>
+=======
+<%for(let i of companies){%>
+    <%= i.company%><br>
+    <a href="/company/update/<%=i._id%>">Edit</a>
+    <a href="/company/delete/<%=i._id%>">delete</a><br><br>
+    <hr>
+<%}%>
+>>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c

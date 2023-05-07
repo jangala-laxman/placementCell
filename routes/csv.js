@@ -1,19 +1,28 @@
 const Student = require("../models/student")
 const Interview = require("../models/interview")
+<<<<<<< HEAD
 const Company = require('../models/company')
+=======
+const company = require('../models/company')
+>>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
 const fs = require("fs")
 const path = require("path")
 const {Parser} = require('json2csv')
 const xlsx = require('xlsx')
 const express = require("express")
 const router = express.Router()
+<<<<<<< HEAD
 const csv = require('csv-stringify');
 const csvwriter = require('csv-writer').createObjectCsvWriter
+=======
+const csvWriter = require('csv-writer');
+>>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
 const json2csv = new Parser()
 const excelJS = require("exceljs");
 
 router.get('/aa',async(req,res)=>{
   try {
+<<<<<<< HEAD
     const interview = await Interview.find().populate(['student','company'])
     let counter = 1;
     let records = []
@@ -53,6 +62,47 @@ for(let i of interview){
   writer.writeRecords(records)
   console.log(records)
   res.send('downloaded data.xlsx')
+=======
+    const student = await Student.find().populate('company')
+    const workbook = new excelJS.Workbook();  // Create a new workbook
+    const worksheet = workbook.addWorksheet("Students"); // New Worksheet
+    // Column for data in excel. key must match data key
+    worksheet.columns = [
+      { header: "S no.", key: "s_no", width: 10 }, 
+      { header: "Username", key: "username", width: 10 },
+      { header: "Email Id", key: "email", width: 10 },
+      { header: "College", key: "college", width: 10 },
+      { header: "Batch", key: "batch", width: 10 },
+      { header: "Status", key: "status", width: 10 },
+      { header: "DSA", key: "DSA", width: 10 },
+      { header: "React", key: "React", width: 10 },
+      { header: "WebDev", key: "Webdev", width: 10 },
+      { header: "Interviews", key: "company", width: 10 },
+      { header: "Result", key: "result", width: 10 },
+  ];
+  // Looping through User data
+  let counter = 1;
+  student.forEach((i) => {
+    i.s_no = counter;
+    let s = ""
+    for(let j of i.company){
+      s+=j.company
+    }
+    if(i.company){
+      i.company = s;
+    }
+    worksheet.addRow(i); // Add data in worksheet
+    counter++;
+  });
+
+  // Making first line in excel bold
+  worksheet.getRow(1).eachCell((cell) => {
+    cell.font = { bold: true };
+  });
+  
+    await workbook.xlsx.writeFile('data.xlsx')
+    res.send('successfully downloaded')
+>>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
 
   } catch (err) {
     console.log(err)

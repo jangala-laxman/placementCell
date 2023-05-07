@@ -13,7 +13,10 @@
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+<<<<<<< HEAD
     "csv-stringify": "^6.3.4",
+=======
+>>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
     "csv-writer": "^1.6.0",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",

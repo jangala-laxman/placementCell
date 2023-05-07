@@ -72,8 +72,12 @@ router.get('/delete/:id', async(req,res)=>{
 
 
 router.get('/results/:interview', async(req,res)=>{
+<<<<<<< HEAD
     const interview = await Interview.findById(req.params.interview).populate(['student', 'company'])
     console.log(interview)
+=======
+    const interview = await Interview.findById(req.params.interview) 
+>>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
     res.render('interview/update_interview', {student:interview.student, company:interview.company, interview:interview})
 })
 

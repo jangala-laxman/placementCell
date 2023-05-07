@@ -38,10 +38,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async(req, res) => {
 
+<<<<<<< HEAD
   const students = await Student.find().populate('company')
   const interviews = await Interview.find()
   
   res.render("home",{students:students, interviews:interviews})
+=======
+  const students = await Student.find().populate('interviews')
+  const interviews = await Interview.find()
+  
+  console.log(students, interviews)
+    res.render("home",{students:students, interviews:interviews})
+>>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
 });
 
 app.use("/student", studentRouter);
