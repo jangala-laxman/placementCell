@@ -1,0 +1,18 @@
+
+<h1>Home page</h1>
+<a href="/dashboard/aa">Download report</a><br><br>
+
+<%for(let i of students){%>
+<%=i.username%><br>
+<%=i.college%><br>
+<%= i.batch %><br>
+<h5>List of interviews</h5>
+<%for(let j of i.company){%>
+    <%=j.company%><br>
+<%}%>
+<br>
+    <%}%><br>
+
+    <hr>
+
+

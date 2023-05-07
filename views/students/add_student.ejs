@@ -1,0 +1,54 @@
+<form action="/student/add_student" method="POST">
+  <h2 style="margin:20px 50px">Add Student</h2>
+    <input type="text" id="inp" name="username" placeholder="username" /><br>
+    <input type="email" id="inp" name="email" placeholder="email" /><br>
+    <input type="text" id="inp" name="college" placeholder="college" /><br>
+    <input type="text" id="inp" name="batch" placeholder="batch" /><br>
+    <select id="inp">Status of your placement
+      <option name="status" value="not placed">not placed</option>
+      <option name="status" value="placed">placed</option>      
+    </select><br>
+    <input type="number" id="inp" name="DSA" placeholder="DSA score" /><br>
+    <input type="number" id="inp" name="Webdev" placeholder="WebDev score" /><br>
+    <input type="number" id="inp" name="React" placeholder="React score" /><br>
+    
+    <button class="inp">submit</button>
+  </form>
+
+  <style>
+    #inp{
+      width:250px;
+      height:30px;
+      margin:10px 0px 10px 50px;
+      padding:5px;
+      border:2px black;
+      border-bottom: solid;
+      border-radius:8px;
+    }
+    p{
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+      margin:10px 1px 1px 50px;
+    }
+.inp{
+  width:250px;
+      height:30px;
+      margin:10px 0px 10px 50px;
+      padding:5px;
+      border-radius:8px;
+}
+
+    .submit{
+      width:70px;
+      height:40px;
+      border-radius:8px;
+      border:5px black;
+      margin:30px;
+      cursor:pointer;
+    }
+
+    .submit:hover{
+      background: black;
+      border-radius:8px;
+      color:white;
+    }
+  </style>

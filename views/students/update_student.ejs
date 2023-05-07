@@ -1,0 +1,18 @@
+<h4>Currently You are editing the <i><span><%=student.username%></span>'s</i> profile</h4> 
+
+<form action="/student/update/<%=student._id %>" method="POST">
+    <input type="text" name="username" value="<%=student.username%>" placeholder="username" /><br>
+    <input type="email" name="email" value="<%=student.email%>" placeholder="email" /><br>
+    <input type="text" name="college" value="<%=student.college%>" placeholder="college" /><br>
+    <input type="text" name="batch" value="<%=student.batch%>" placeholder="batch" /><br>
+    <select name="status" value="<%=student.status%>">Status of your placement
+        <option name="status" value="not placed">not placed</option>
+        <option name="status" value="placed">placed</option>      
+        </select><br>
+    <input type="number" name="DSA" value="<%=student.DSA%>" placeholder="DSA score" /><br>
+    <input type="number" name="Webdev" value="<%=student.Webdev%>" placeholder="WebDev score" /><br>
+    <input type="number" name="React" value="<%=student.React%>" placeholder="React score" /><br>   
+
+    <button>submit</button>
+  </form>
+

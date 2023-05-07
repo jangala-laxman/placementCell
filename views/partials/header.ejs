@@ -1,0 +1,94 @@
+<header>
+  <div class="logo"><a class="placementcell" href="/">PlacementCell</a></div>  <nav>
+    <ul class="links">
+      <li><a href="/user/register">Register </a></li>
+      <li><a href="/user/login">Login </a></li>
+    </ul>
+  </nav>
+  <div>
+    <ul class="navigate">
+      <li class="badges"><a href="/student">Students</a></li>
+      <li class="badges"><a href="/student/add_student">Add student </a></li>
+      <li class="badges"><a href="/interview">All Interviews </a></li>
+      <li class="badges"><a href="/company/add_company">Add Company </a></l>
+      <li class="badges"><a href="/company/all_companies">Apply Here </a></li>
+    </ul>
+   </div>
+</header>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;    
+}
+
+body{
+    height:100vh;
+    background-color: #ffffff;
+}
+.logo {
+  width:100%;
+  height:max-content;
+  background-color: black;
+  text-align: center;
+}
+
+.placementcell{
+  text-decoration:none;
+  color:white;
+  text-align: center;
+  margin:auto;
+  font-size:30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.links{
+  width:100%;
+  height:max-content;
+  display:flex;
+  justify-content:end;
+  padding:10px;
+  gap:10px;
+}
+
+li{
+  text-align: center;
+  list-style: none;
+  text-decoration: none;
+}
+
+a{
+  margin:5px 0px;
+  text-decoration: none;
+  color:black;
+  cursor:pointer;
+  padding:5px;
+}
+
+.navigate{
+  display:flex;
+  flex-direction: row;
+  justify-content:center;
+}
+
+.badges{
+  width:max-content;
+  height:max-content;
+  margin:auto;
+  gap:20px;
+  color:black;
+  padding:10px;
+  border:2px solid white;
+  border-radius:15px;
+}
+.badges:hover{
+  cursor:pointer;
+  background: radial-gradient(white,grey);
+  color:white;
+}
+
+
+
+</style>

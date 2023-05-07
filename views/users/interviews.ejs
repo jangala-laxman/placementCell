@@ -1,0 +1,16 @@
+
+<h5>Interviews list</h5>
+<h2>Status of the applied candidates</h2>
+
+<ol>
+    <%for(let j of companies){%>
+        <li>
+            <div>
+                <p><%= j.company%></p>
+                <p><a href="/interview/update/<%=j._id%>">Edit</a></p>
+                <p><a href="/interview/delete/<%=j._id%>">Delete</a></p>
+            </div>
+        </li>
+    <%}%>
+
+</ol>

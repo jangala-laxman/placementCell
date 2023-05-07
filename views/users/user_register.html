@@ -1,0 +1,180 @@
+<div class="logo"><a class="placementcell" href="/">PlacementCell</a></div>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <body>
+    <!-- Body of Form starts -->
+
+  	<div class="container">
+      <div class="register"><h2>Register Here</h2></div>
+      <form  action="/user/register" method="post" autocomplete="on">
+        <!--username-->
+    		<div class="box">
+          <label for="username" class="fl fontLabel"> First Name: </label>
+    			<div class="fr">
+    					<input type="text" name="username" placeholder="User Name"
+              class="textBox" autofocus="on" required>
+    			</div>
+    			<div class="clr"></div>
+    		</div>
+    		<!--First name-->
+
+
+
+    		<!---Email ID---->
+    		<div class="box">
+          <label for="email" class="fl fontLabel"> Email ID: </label>
+    		<div class="fr">
+    					<input type="email" required name="email" placeholder="Email Id" class="textBox">
+    			</div>
+    			<div class="clr"></div>
+    		</div>
+    		<!--Email ID----->
+
+
+    		<!---Password------>
+    		<div class="box">
+          <label for="password" class="fl fontLabel"> Password </label>
+    			<div class="fr">
+    					<input type="Password" required name="password" placeholder="Password" class="textBox">
+    			</div>
+    			<div class="clr"></div>
+    		</div>
+    		<!---Password---->
+
+        
+    		<!---Confirm Password------>
+    		<div class="box">
+          <label for="confirm_password" class="fl fontLabel"> Password </label>
+    			<div class="fr">
+    					<input type="Password" required name="confirm_password" placeholder="Password" class="textBox">
+    			</div>
+    			<div class="clr"></div>
+    		</div>
+    		<!---Confirm Password---->
+
+
+
+    		<!---Submit Button------>
+    		<div class="box" style="background: #2d3e3f">
+    				<input type="Submit" name="Submit" class="submit" value="SUBMIT">
+    		</div>
+    		<!---Submit Button----->
+      </form>
+  </div>
+  <!--Body of Form ends--->
+  </body>
+
+
+
+
+<style>
+  .logo {
+  width:100%;
+  height:max-content;
+  background-color: black;
+  text-align: center;
+}
+
+.placementcell{
+  text-decoration:none;
+  color:white;
+  text-align: center;
+  margin:auto;
+  font-size:30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+  background: url(http://wrbbradio.org/wp-content/uploads/2016/10/grey-background-07.jpg) no-repeat center fixed;
+  background-size: cover;
+  background-color: black;
+}
+
+.container{
+	background: #2a2929;
+	width: 350px;
+	height: 400px;
+	padding-bottom: 20px;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: auto;
+  padding: 70px 50px 20px 50px;
+  border-radius:15px;
+  box-shadow: 1px 1px 23px;
+}
+
+
+.fl{
+	float: left;
+  width: 110px;
+  line-height: 35px;
+}
+
+.fontLabel{
+  color: white;
+}
+
+.fr{
+	float: right;
+}
+
+.clr{
+	clear: both;
+}
+
+.box{
+	width: 360px;
+	height: 35px;
+	margin-top: 10px;
+	font-family: verdana;
+	font-size: 12px;
+  border-radius: 6px;
+  text-align: center;
+
+}
+
+.textBox{
+	height: 35px;
+	width: 190px;
+	border: none;
+  padding-left: 20px;
+  border-radius: 6px;
+}
+
+.new{
+  float: left;
+}
+
+.radio{
+	color: white;
+	background: #2d3e3f;
+	line-height: 38px;
+}
+
+
+.submit{
+	float: right;
+	border: none;
+	color: white;
+	width: 110px;
+	height: 35px;
+	background: #010101;
+	text-transform: uppercase;
+  cursor: pointer;
+}
+
+.register{
+  color:white;
+  text-align:center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin:0px 0px 40px 0px;
+}
+</style>

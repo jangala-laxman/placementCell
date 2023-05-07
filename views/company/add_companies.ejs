@@ -1,0 +1,36 @@
+<form action="/company/add_company" method="POST">
+  <h2 style="margin:20px 50px">Add Company</h2>
+    <input type="text" id="inp" name="company" placeholder="company name" /><br>
+    <input type="number" id="inp" name="ctc" placeholder="Cost to company"/>LPA<br>
+    <button class="submit">submit</button>
+  </form>
+
+  <style>
+      #inp{
+      width:250px;
+      height:30px;
+      margin:10px 0px 10px 50px;
+      padding:5px;
+      border:2px black;
+      border-bottom: solid;
+      border-radius:8px;
+    }
+    p{
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+      margin:10px 1px 1px 50px;
+    }
+        .submit{
+      width:70px;
+      height:20px;
+      border-radius:8px;
+      border:5px black;
+      margin:50px;
+      cursor:pointer;
+    }
+
+    .submit:hover{
+      background: black;
+      border-radius:8px;
+      color:white;
+    }
+  </style>

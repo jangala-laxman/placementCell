@@ -1,0 +1,56 @@
+
+<form method="POST">
+  <input type="text" id="inp" name="students" placeholder="student application id"/><br/>
+  <input type="radio" id="Offline" name="venue" value="offline"/>
+  <label for="offline">Offline</label><br>
+  <input type="radio" id="Online" name="venue" value="online"/>
+  <label for="online">online</label><br>
+  <input type="date" id="inp" name="date" /><br>
+  <input type="time" id="inp" name="time"/><br>
+  <button class="inp">submit</button>
+  </form>
+
+  <style>
+    #inp{
+      width:250px;
+      height:30px;
+      margin:10px 0px 10px 50px;
+      padding:5px;
+      border:2px black;
+      border-bottom: solid;
+      border-radius:8px;
+    }
+    p{
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+      margin:10px 1px 1px 50px;
+    }
+.inp{
+  width:250px;
+      height:30px;
+      margin:10px 0px 10px 50px;
+      padding:5px;
+      border-radius:8px;
+}
+#Online, #Offline{
+  width:250px;
+      height:30px;
+      margin:10px -100px 10px -60px;
+      padding:5px;
+      border-radius:8px;
+}
+
+    .submit{
+      width:70px;
+      height:40px;
+      border-radius:8px;
+      border:5px black;
+      margin:30px;
+      cursor:pointer;
+    }
+
+    .submit:hover{
+      background: black;
+      border-radius:8px;
+      color:white;
+    }
+  </style>

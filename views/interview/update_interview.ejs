@@ -1,0 +1,39 @@
+<h4 style="margin:20px 50px"> <%=student.username%> - <%= company.company%> Interview </h4>  
+<form method="POST">
+
+    <h4 style="margin:20px 50px">Results</h4>
+    <input type="radio" name="result" id="pass" value="Pass" />
+    <label for="pass">Pass</label><br/>
+    <input type="radio" name="result" id="Fail" value="Fail" />
+    <label for="Fail">Fail</label><br>
+    <input type="radio" name="result" id="OnHold" value="OnHold" />
+    <label for="Hold-on">OnHold</label><br>
+    <input type="radio" name="result" id="Didnt-attempt" value="Didn't Attempt" />
+    <label for="Didn't-attempt">Didn't attempt</label><br><br/>
+    <hr>
+   
+    
+    <button class="submit">submit</button><br/>
+  </form>
+
+  <style>
+
+    #pass, #Fail, #OnHold, #Didnt-attempt{
+      margin:20px 50px;
+    }
+
+    .submit{
+      width:70px;
+      height:40px;
+      border-radius:8px;
+      border:5px black;
+      margin:30px;
+      cursor:pointer;
+    }
+
+    .submit:hover{
+      background: black;
+      border-radius:8px;
+      color:white;
+    }
+  </style>
