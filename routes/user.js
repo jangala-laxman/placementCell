@@ -9,18 +9,11 @@ const passport = require('passport')
 router.get('/login', async(req,res)=>{
     const user = await User.find({})
     try{
-<<<<<<< HEAD
-        res.sendFile('C:/Users/dell/Downloads/placementCell-master/placementCell-master/views/users/user_login.html')
+        res.sendFile('/users/user_login.html', {root:'views'})
     }
     catch(err){
       console.log(err)
       res.send(err)
-=======
-        res.sendFile('user/user_login.html')
-    }
-    catch(err){
-        res.redirect('/')
->>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
     }
 })
 router.post('/login', async(req,res)=>{
@@ -43,11 +36,7 @@ router.post('/login', async(req,res)=>{
 router.get('/register', async (req,res)=>{
     const user = await User.find({})
     try{
-<<<<<<< HEAD
-        res.sendFile('C:/Users/dell/Downloads/placementCell-master/placementCell-master/views/users/user_register.html')
-=======
-        res.sendFile(__dirname+'/users/user_register')
->>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
+        res.sendFile('/users/user_register.html', {root:'views'})
     }
     catch(err){
         res.redirect('/user')

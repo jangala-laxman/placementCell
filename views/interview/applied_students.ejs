@@ -2,7 +2,6 @@
 
 <%for(let i of company.students){%>
     <p>Username :<%= i.username%> </p>
-<<<<<<< HEAD
     <p>Date: 
         <% if(interview.date !=0){%>
             <%= interview.date%>
@@ -39,10 +38,3 @@
       margin:10px 1px 1px 50px;
     }
 </style>
-=======
-    <a href="/interview/results/<%=interview._id%>">Update Interview</a>
-    <a href="/company/<%=company._id%>/allocate_interview/<%=i._id%>">Allocate Interview</a>
-    <a href="/company/<%=company._id%>/delete/<%=i._id%>">drop interview</a>
-
-<%}%>    
->>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c

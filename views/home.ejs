@@ -1,25 +1,74 @@
 
-<h1>Home page</h1>
-<a href="/dashboard/aa">Download report</a><br><br>
+<h1 style="margin:20px 50px">Home page</h1>
+<a class="a" href="/dashboard/aa">Download report</a><br><br>
 
 <%for(let i of students){%>
-<%=i.username%><br>
-<%=i.college%><br>
-<%= i.batch %><br>
-<h5>List of interviews</h5>
-<%for(let j of i.company){%>
-    <%=j.company%><br>
-<<<<<<< HEAD
-=======
+    <div class="students">
+<div><p>Student Name : <%=i.username%></p></div>
+<div>
+    <%for(let j of i.company){%>
+    <p><%=j.company%></p><br>
+    <%}%>
+</div>
+<%}%><br/>
+</div>
+
+    <style>
+        #inp{
+        width:250px;
+        height:30px;
+        margin:10px 0px 10px 50px;
+        padding:5px;
+        border:2px black;
+        border-bottom: solid;
+        border-radius:8px;
+        }
+        p{
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+        margin:10px 10px 10px 50px;
+        }
+        .inp{
+        width:250px;
+        height:30px;
+        margin:10px 0px 10px 50px;
+        padding:5px;
+        border-radius:8px;
+        }
+        .list{
+        margin:2px;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        }
+        .a{
+        height:30px;
+        width:150px;
+        text-align: center;
+        background: orange;
+        margin:10px 0px 0px 50px;
+        border-radius:8px;
+        }
+        .submit{
+        width:70px;
+        height:40px;
+        border-radius:8px;
+        border:5px black;
+        margin:30px;
+        cursor:pointer;
+        }
+        .submit:hover{
+        background: black;
+        border-radius:8px;
+        color:white;
+        }
+        .students{
+            display:flex;
+            flex-direction: row;
+            align-items: space-around;
+            justify-content: start;
+            flex-wrap: wrap;
+            gap:10px;
+
+        }
+    </style>
     
->>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
-<%}%>
-<br>
-    <%}%><br>
-
-    <hr>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c

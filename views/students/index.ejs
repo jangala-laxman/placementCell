@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <h2 style="margin:20px 50px">All Students</h2>
 
 <%student.forEach((i)=>{%>
@@ -71,37 +70,3 @@
     color:white;
     }
 </style>
-=======
-All Students
-
-<%student.forEach((i)=>{%>
-
-<h3><%= i.username%>    </h3>
-<%= i._id%><br>
-<p><%= i.email%>    </p>
-<p><%= i.college%>    </p>
-<p><%= i.batch%>    </p>
-<p><%= i.status%>    </p>
-<p><%= i.application_number%>    </p>
-
-<ul>
-    <li><p>DSA Score <%= i.DSA%>    </p></li>
-    <li><p>WebDev score <%= i.Webdev%>    </p></li>
-    <li><p>React Score <%= i.React%>    </p></li>
-</ul>
-
-<h5>You have applied for the following companies</h5>
-<% for(let j of i.company){%>
-    <%= j.company%><br>
-    <%}%>
-
-<a href="/company/all_companies">Register for Interview</a><br>
-<a href="/student/update/<%=i._id%>">Edit</a><br>
-<a href="/student/delete/<%=i._id%>">delete</a><br>
-<hr>
-    
-<%})%>
-
-    <br><br>
-
->>>>>>> 0603d45fec33ffb9d3755f72c1d93735db045f2c
