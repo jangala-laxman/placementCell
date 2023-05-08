@@ -10,9 +10,10 @@ const companyRouter = require("./routes/company");
 const userRouter = require("./routes/user");
 const csvRouter = require('./routes/csv')
 const Student = require("./models/student");
+const User = require("./models/user");
 const Interview = require("./models/interview");
-
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const db = mongoose.connection;
 
 mongoose.connect("mongodb+srv://srilaxman48:L1u9c9k9y@cluster0.zwtmwnc.mongodb.net/Placement");
@@ -27,11 +28,63 @@ app.use(expressEJSLayouts);
 app.set("views", path.join(__dirname, "views"));
 app.set("layout", "layouts/layout");
 
-app.use(session({
-  secret:'cat',
-  resave:true,
-  saveUninitialized:true,
-}))
+let store = new MongoStore({
+  mongoUrl: "mongodb+srv://srilaxman48:L1u9c9k9y@cluster0.zwtmwnc.mongodb.net/Placement",
+  collection: "sessions",
+  ttl: 300 * 1000,
+  autoRemove: "native",
+});
+
+app.use(
+  session({
+    secret: "SECRET KEY",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { originalMaxAge: 1000 * 60 * 5 }, //5mins
+    store:store,
+  })
+);
+
+function checkAuth(req, res, next) {
+  if (req.session.user) {
+    res.set(
+      "Cache-Control",
+      "no-Cache, private, no-store, must-revalidate, post-chech=0,pre-check=0"
+    );
+    // res.render('home', {user:req.session.user})
+    next();
+  } else {
+    // res.render('home', {user:req.session.user, session:req.session})
+    next();
+  }
+}
+
+app.get("/", checkAuth, async (req, res) => {
+  let session;
+  try {
+    const students = await Student.find().populate('company')
+    const interviews = await Interview.find()
+    if (req.session.user) {
+      req.session.user = "RunChodDaas";
+      const user = await User.find();
+
+      console.log(req.session);
+      req.session.save((err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(req.session.user);
+        }
+      });
+      session = req.session.user;
+      res.render("home", { user: user, session: req.session , students:students, interviews:interviews });
+    } else {
+      res.render("home_unauth", { user: null, session: null });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -1,18 +1,27 @@
 const Student = require("../models/student")
 const Interview = require("../models/interview")
-const Company = require('../models/company')
-const fs = require("fs")
 const path = require("path")
-const {Parser} = require('json2csv')
 const xlsx = require('xlsx')
 const express = require("express")
 const router = express.Router()
-const csv = require('csv-stringify');
 const csvwriter = require('csv-writer').createObjectCsvWriter
-const json2csv = new Parser()
-const excelJS = require("exceljs");
 
-router.get('/aa',async(req,res)=>{
+function checkAuth(req, res, next) {
+  if (req.session.user) {
+    res.set(
+      "Cache-Control",
+      "no-Cache, private, no-store, must-revalidate, post-chech=0,pre-check=0"
+    );
+    session = req.session.user;
+    // res.render('home', {user:req.session.user})
+    next();
+  } else {
+    // res.render('home', {user:req.session.user, session:req.session})
+    next();
+  }
+} 
+
+router.get('/aa', checkAuth, async(req,res)=>{
   try {
     const interview = await Interview.find().populate(['student','company'])
     let counter = 1;
@@ -61,7 +70,7 @@ for(let i of interview){
 })
 
 
-router.get('/',async(req,res)=>{
+router.get('/', checkAuth, async(req,res)=>{
     try{
       let wb = xlsx.utils.book_new()
       const student = await Student.find().populate('company')

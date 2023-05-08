@@ -4,17 +4,33 @@ const Company = require('../models/company')
 const Student = require('../models/student')
 const Interview = require('../models/interview')
 
-router.get('/all_companies', async(req,res)=>{
+function checkAuth(req, res, next) {
+    if (req.session.user) {
+      res.set(
+        "Cache-Control",
+        "no-Cache, private, no-store, must-revalidate, post-chech=0,pre-check=0"
+      );
+      session = req.session.user;
+      // res.render('home', {user:req.session.user})
+      next();
+    } else {
+      // res.render('home', {user:req.session.user, session:req.session})
+      next();
+    }
+  }
+  
+
+router.get('/all_companies', checkAuth, async(req,res)=>{
     const company = await Company.find({})
-    res.render("company/all_companies", {companies:company})
+    res.render("company/all_companies", {companies:company, session:session})
 })
 
-router.get("/add_company",async(req,res)=>{
+router.get("/add_company",  checkAuth, async(req,res)=>{
     const company = await Company.find({})
-    res.render('company/add_companies',{company:company})
+    res.render('company/add_companies',{company:company, session:session})
 })
 
-router.post('/add_company', async(req,res)=>{
+router.post('/add_company',  checkAuth, async(req,res)=>{
     const company = new Company({
         company:req.body.company,
         ctc:req.body.ctc
@@ -24,20 +40,20 @@ router.post('/add_company', async(req,res)=>{
     res.redirect('/company/all_companies')
 })
 
-router.get('/delete/:company', async(req,res)=>{
+router.get('/delete/:company',  checkAuth, async(req,res)=>{
     try{
         const company  = await Company.find()
         await Student.findByIdAndUpdate(req.params.company, {$pull:{company:req.params.company}})
         await Company.findByIdAndDelete(req.params.company)
         
-        res.render("interview/all_interviews",{companies:company} )
+        res.render("interview/all_interviews",{companies:company, session:session} )
     }catch(err){
         console.log(err)
         res.send(err)
     }
 })
 
-router.get("/:company/delete/:student", async(req,res)=>{
+router.get("/:company/delete/:student",  checkAuth, async(req,res)=>{
     try{
         const interview = await Interview.findOneAndRemove({company:req.params.company,student:req.params.student})
 
@@ -57,34 +73,34 @@ router.get("/:company/delete/:student", async(req,res)=>{
     }
 })
 
-router.get('/update/:id', async(req,res)=>{
+router.get('/update/:id',  checkAuth, async(req,res)=>{
     const company = await Company.findById(req.params.id).populate('students')
     const interview = await Interview.findOne({company:company})
     console.log(interview)
-    res.render('interview/applied_students', {company:company, interview:interview})
+    res.render('interview/applied_students', {company:company, interview:interview, session:session})
 })
 
-router.get('/:company/allocate_interview/:student', async(req,res)=>{
+router.get('/:company/allocate_interview/:student',  checkAuth, async(req,res)=>{
    try{
      const company = await Company.findById(req.params.company)
      const student = await Student.findById(req.params.student)
      const interview = await Interview.find({company:company, student:student})
      console.log(interview)
-     res.render('interview/allocate_interview', {company:company, student:student})
+     res.render('interview/allocate_interview', {company:company, student:student, session:session})
    }catch(err){
     console.log(err)
     res.send(err)
    }
 })
 
-router.post('/:company/allocate_interview/:student', async(req,res)=>{
+router.post('/:company/allocate_interview/:student', checkAuth, async(req,res)=>{
     const company = await Company.findById(req.params.company)
     const student = await Student.findById(req.params.student)
     const interview = await Interview.findOneAndUpdate({company:company, student:student}, {
         date:req.body.date
     })
     console.log(interview)
-    res.render('interview/allocate_interview', {company:company, student:student})
+    res.render('interview/allocate_interview', {company:company, student:student, session:session })
 })
 
 

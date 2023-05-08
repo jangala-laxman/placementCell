@@ -4,17 +4,32 @@ const Student = require('../models/student')
 const Interview = require('../models/interview')
 const Company = require('../models/company')
 
-router.get('/', async(req,res)=>{
+function checkAuth(req, res, next) {
+    if (req.session.user) {
+      res.set(
+        "Cache-Control",
+        "no-Cache, private, no-store, must-revalidate, post-chech=0,pre-check=0"
+      );
+      session = req.session.user;
+      // res.render('home', {user:req.session.user})
+      next();
+    } else {
+      // res.render('home', {user:req.session.user, session:req.session})
+      next();
+    }
+  }
+   
+router.get('/', checkAuth, async(req,res)=>{
     const company = await Company.find().populate('students')
-    res.render('interview/all_interviews',{companies:company})    
+    res.render('interview/all_interviews',{companies:company, session:session})    
 })
 
 router.get('/create_interview', async(req,res)=>{
     const interviews = await Interview.find()
-    res.render('company/add_companies')    
+    res.render('company/add_companies', {session:session})    
 })
 
-router.get('/update/:id', async(req,res)=>{
+router.get('/update/:id',  checkAuth,  async(req,res)=>{
     await Interview.findById(req.params.id,(err, interview)=>{
         if(err){
             console.log(err)
@@ -42,7 +57,7 @@ router.post('/update/:id', async(req,res)=>{
 router.get('/all_companies', async(req,res)=>{
     const companies = await Company.find()
     console.log(companies)
-    res.render('company/all_companies.ejs',{companies:companies})
+    res.render('company/all_companies.ejs',{companies:companies, session:session})
 })
 
 
@@ -74,7 +89,7 @@ router.get('/delete/:id', async(req,res)=>{
 router.get('/results/:interview', async(req,res)=>{
     const interview = await Interview.findById(req.params.interview).populate(['student', 'company'])
     console.log(interview)
-    res.render('interview/update_interview', {student:interview.student, company:interview.company, interview:interview})
+    res.render('interview/update_interview', {student:interview.student, company:interview.company, interview:interview, session:session})
 })
 
 router.post('/results/:interview', async(req,res)=>{
@@ -87,7 +102,7 @@ router.post('/results/:interview', async(req,res)=>{
             status:"true"
         })
     }
-    res.render('interview/update_interview', {student:interview.student, company:interview.company, interview:interview})
+    res.render('interview/update_interview', {student:interview.student, company:interview.company, interview:interview, session:session})
 })
 
 module.exports  = router

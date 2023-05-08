@@ -3,7 +3,9 @@ const User = require('../models/user')
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const session =require('express-session')
-const passport = require('passport')
+const Student = require("../models/student");
+const Interview = require("../models/interview");
+
 
 
 router.get('/login', async(req,res)=>{
@@ -17,21 +19,33 @@ router.get('/login', async(req,res)=>{
     }
 })
 router.post('/login', async(req,res)=>{
-    const user = await User.find({})
-    try{
-        const email = req.body.email
-        const useremail = await User.findOne({email:email})
-      if(useremail.password === req.body.password){
-        console.log("success")
-        res.status(201).redirect("/")
-      }else{
-        res.send("invalid username/password")
-      }
+  try{
+    const students = await Student.find().populate('company')
+    const interviews = await Interview.find()
+
+    const email = req.body.email;
+    const user = await User.findOne({email:email})
+    if(req.session.user){
+        return res.send("You already logged in")
     }
-    catch(err){
-        console.log(err, "invalid username/password")
-        res.send("invalid credentials")
+    if(user){
+        const compare = bcrypt.compare( req.body.password, user.password)
+        if(compare){
+            req.session.user = user
+            
+            res.render('home',{user:req.session.user, session:req.session, students:students, interviews:interviews})
+        }
+        else{
+            res.send("wrong username or password")
+        }
     }
+    else{
+        res.send("Wrong username or Password")
+    }    
+}catch(err){
+    console.log(err)
+    res.status(500).send("internal server error")
+}
 })
 router.get('/register', async (req,res)=>{
     const user = await User.find({})
@@ -42,13 +56,6 @@ router.get('/register', async (req,res)=>{
         res.redirect('/user')
     }
 })
-
-router.use(session({
-    secret:"nothing",
-    resave:false,
-    saveUninitialized:false
-  }))
-  
 
 router.post('/register', async(req,res)=>{
     
@@ -78,8 +85,18 @@ router.post('/register', async(req,res)=>{
   }
 })
 
-router.get('/user/:id', async(req,res)=>{
-    const user = await User.findById({email:email})
+
+
+router.get('/logout', async(req,res)=>{
+  req.session.user = null
+req.session.save(function (err) {
+  if (err) next(err)
+  req.session.regenerate(function (err) {
+    if (err) next(err)
+    res.redirect('/')
+  })
+})
+  // res.render('home', {session:null, user:null})
 })
 
 

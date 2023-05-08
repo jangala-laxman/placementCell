@@ -11,7 +11,7 @@
       <form  action="/user/register" method="post" autocomplete="on">
         <!--username-->
     		<div class="box">
-          <label for="username" class="fl fontLabel"> First Name: </label>
+          <label for="username" class="fl fontLabel"> UserName: </label>
     			<div class="fr">
     					<input type="text" name="username" placeholder="User Name"
               class="textBox" autofocus="on" required>
@@ -46,7 +46,7 @@
         
     		<!---Confirm Password------>
     		<div class="box">
-          <label for="confirm_password" class="fl fontLabel"> Password </label>
+          <label for="confirm_password" class="fl fontLabel"> Confirm Password </label>
     			<div class="fr">
     					<input type="Password" required name="confirm_password" placeholder="Password" class="textBox">
     			</div>
@@ -61,6 +61,8 @@
     				<input type="Submit" name="Submit" class="submit" value="SUBMIT">
     		</div>
     		<!---Submit Button----->
+
+			<p class="ap">Already user? </p><a class="a" href="/user/login">Login</a>
       </form>
   </div>
   <!--Body of Form ends--->
@@ -177,4 +179,16 @@ body{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin:0px 0px 40px 0px;
 }
+ 
+ .ap, .a{
+	margin:5px auto;
+	text-decoration: none;
+	color:white;
+	display:inline;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }
+
+ .a:hover{
+	color:blue;
+ }
 </style>

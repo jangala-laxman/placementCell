@@ -5,12 +5,14 @@
     <h3>Login Here</h3>
 
     <label for="email">email</label>
-    <input type="text" placeholder="Email" id="username">
+    <input type="text" name="email" placeholder="Email" id="username">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
+    <input type="password" name="password" placeholder="Password" id="password">
 
     <button>Log In</button>
+    <a class="a" href="/user/register">Register</a><p class="ap"> here if Not an user </p>
+
 </form>
 
 <style media="screen">
@@ -151,5 +153,17 @@ margin-left: 25px;
 .social i{
 margin-right: 4px;
 }
+
+.ap, .a{
+	margin:5px auto;
+	text-decoration: none;
+	color:white;
+  display:inline;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }
+
+ .a:hover{
+	color:blue;
+ }
 
 </style>
