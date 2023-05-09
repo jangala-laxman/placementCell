@@ -1,0 +1,5 @@
+Student id,student name,student college,student status,DSA Final Score,WebD Final Score,React Final Score,interview date,interview company,interview student result
+1,laxman,VIT,true,90,89,89,2023-05-18,netflix,Pass
+2,Ram,VIT,false,91,92,90,2023-05-27,facebook,Didn't Attempt
+3,laxman,VIT,true,90,89,89,2023-05-19,facebook,Didn't Attempt
+4,Vikram,VIT,false,90,89,99,2023-05-10,netflix,Didn't Attempt

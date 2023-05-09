@@ -26,9 +26,9 @@ router.get('/aa', checkAuth, async(req,res)=>{
     const interview = await Interview.find().populate(['student','company'])
     let counter = 1;
     let records = []
-
+    let path = 'data.csv'
     const writer = csvwriter({
-      path:path.resolve('data.csv'),
+      path:path,
       header:[
       { title: "Student id", id: "student_id", width: 10 }, 
       { title: "student name", id: "student_username", width: 10 },
@@ -59,10 +59,9 @@ for(let i of interview){
   counter++;
 }
 
-  writer.writeRecords(records)
-  console.log(records)
-  res.download('data.csv')
-
+  writer.writeRecords(records).then(()=>{
+    res.download(path)
+  })
   } catch (err) {
     console.log(err)
       res.send(err);
@@ -81,7 +80,6 @@ router.get('/', checkAuth, async(req,res)=>{
       xlsx.utils.book_append_sheet(wb, ws, "sheet1")
       xlsx.writeFile(wb, down,{bookType:'csv'})
       res.download(down)
-      console.log(down)
     }catch(err){
         console.log(err)
     }
