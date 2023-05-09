@@ -61,7 +61,7 @@ for(let i of interview){
 
   writer.writeRecords(records)
   console.log(records)
-  res.send('downloaded data.xlsx')
+  res.download('data.csv')
 
   } catch (err) {
     console.log(err)
